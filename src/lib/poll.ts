@@ -3,7 +3,7 @@ import { BriefcaseBusiness, GraduationCap, Sprout, Users, type LucideIcon } from
 export const POLL_ID = "reduce-unemployment";
 
 /** Public (published) address, so phones can open the vote page without any sign-in. */
-export const PUBLIC_SITE_URL = "https://armenia-workforce-story-2.lovable.app";
+export const PUBLIC_SITE_URL = "https://presentation-phi-lime.vercel.app";
 export const VOTE_URL = `${PUBLIC_SITE_URL}/vote`;
 export const POLL_QUESTION = "Ի՞նչը կօգնի նվազեցնել գործազրկությունը";
 
