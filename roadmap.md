@@ -10,4 +10,5 @@
 - [x] QR opens a public link (published site) so anyone can vote without signing in
 - [x] Imported project from GitHub into this Lovable project (slides, vote page, voting storage)
 - [x] Title slide presenter speaks ~30 s in Armenian about the topic's meaning, not reading slide text
+- [x] Fix build errors blocking publish
 - [ ] After first publish: point the vote QR (`PUBLIC_SITE_URL`) at this project's published address — blocked: not published yet
