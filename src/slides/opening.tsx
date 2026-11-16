@@ -24,7 +24,6 @@ import { Ambient, IconBadge, ImageFrame, Kicker, d } from "@/components/slides/p
 import { useCountUp, useSlideMode } from "@/components/slides/slide-context";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import presenterPoster from "@/assets/presenter-intro-poster.jpg";
-import presenterVideo from "@/assets/presenter-intro-armenian.mp4.asset.json";
 import yerevan from "@/assets/slide-yerevan.jpg";
 import jobseeker from "@/assets/slide-jobseeker.jpg";
 import automation from "@/assets/slide-automation.jpg";
@@ -60,7 +59,7 @@ export function TitleSlide() {
           {live && (
             <video
               ref={videoRef}
-              src={presenterVideo.url}
+              src="/media/presenter-intro-armenian.mp4"
               poster={presenterPoster}
               playsInline
               preload="auto"
