@@ -36,4 +36,4 @@ use the editor.
 - Fade half-bleed photos with mask utilities or `--slide-bg`-based edge gradients so fades always match the slide's tone.
 - Audience voting: options, percentage math and DB calls live in `src/lib/poll.ts`; votes go to `poll_votes` (anon insert only) and results are read via the `get_poll_results` security-definer function, so voter rows are never publicly readable.
 - The vote QR encodes the published site URL (`PUBLIC_SITE_URL` in `src/lib/poll.ts`), never `window.location`, because preview links require sign-in; update it if the domain changes.
-- The title slide's talking presenter is a CDN video (`presenter-intro.mp4.asset.json`) with its first frame as the poster; static mode shows only the poster.
+- The title slide's talking presenter is a CDN video (`presenter-intro-armenian.mp4.asset.json`, ~31 s Armenian speech that adds context beyond the slide text) with its first frame as the poster; static mode shows only the poster.

@@ -1,0 +1,8 @@
+[
+  {"capability":"code","source":"github armenia-workforce-story-2","outcome":"migrate","status":"verified","next_action":null},
+  {"capability":"schema","source":"poll_votes + get_poll_results","outcome":"migrate","status":"verified","next_action":null},
+  {"capability":"records","source":"old poll votes","outcome":"skip","status":"pending","next_action":"old audience votes not exported; new votes start from zero"},
+  {"capability":"auth","source":"none (anonymous voting)","outcome":"none","status":"verified","next_action":null},
+  {"capability":"media","source":"presenter video","outcome":"replaced with 31 s Armenian speech","status":"verified","next_action":null},
+  {"capability":"cutover","source":"vote QR PUBLIC_SITE_URL","outcome":"migrate","status":"pending","next_action":"publish, then point PUBLIC_SITE_URL at this project's address"}
+]

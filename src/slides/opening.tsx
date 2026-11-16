@@ -24,7 +24,7 @@ import { Ambient, IconBadge, ImageFrame, Kicker, d } from "@/components/slides/p
 import { useCountUp, useSlideMode } from "@/components/slides/slide-context";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import presenterPoster from "@/assets/presenter-intro-poster.jpg";
-import presenterVideo from "@/assets/presenter-intro.mp4.asset.json";
+import presenterVideo from "@/assets/presenter-intro-armenian.mp4.asset.json";
 import yerevan from "@/assets/slide-yerevan.jpg";
 import jobseeker from "@/assets/slide-jobseeker.jpg";
 import automation from "@/assets/slide-automation.jpg";
