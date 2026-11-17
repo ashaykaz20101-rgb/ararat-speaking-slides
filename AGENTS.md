@@ -31,7 +31,7 @@ use the editor.
 
 ## Slides architecture
 - Slides are React components registered in `src/slides/deck.ts`; add new slides there so the viewer, grid and `/print` PDF pick them up automatically.
-- Every slide wraps `SlideLayout` (the master: tone, footer credit, page number) — never hand-roll a footer on a slide.
+- Every slide wraps `SlideLayout` (the master: tone, footer, page number, shared spark/light-sweep effects) — never hand-roll a footer on a slide.
 - Slides render at 1920x1080 via `ScaledSlide`; thumbnails and `/print` use static mode (`.slide-static`) so animations never freeze mid-state in previews or PDF.
 - Fade half-bleed photos with mask utilities or `--slide-bg`-based edge gradients so fades always match the slide's tone.
 - Audience voting: options, percentage math and DB calls live in `src/lib/poll.ts`; votes go to `poll_votes` (anon insert only) and results are read via the `get_poll_results` security-definer function, so voter rows are never publicly readable.

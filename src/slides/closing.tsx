@@ -269,7 +269,7 @@ export function ConclusionSlide() {
       <div className="relative z-10 w-[1080px] pl-[120px] pt-[96px]">
         <Kicker tone="dark">Եզրակացություն</Kicker>
         <h2 className="anim-flip slide-title mt-7 font-display font-bold text-paper" style={d(150)}>
-          Զբաղվածություն՝ <span className="text-gradient-apricot">զարգացման հիմք</span>
+          Զբաղվածություն՝ <span className="text-shimmer">զարգացման հիմք</span>
         </h2>
         <div className="mt-9 grid grid-cols-2 gap-4">
           {effects.map((e, i) => (
@@ -295,13 +295,6 @@ export function ConclusionSlide() {
 }
 
 /* 13 — Thank you */
-// Fixed spark positions (no randomness, so server and browser render the same).
-const sparks = [
-  { x: 6, size: 20, dur: 9, delay: 0 }, { x: 14, size: 12, dur: 12, delay: 3 }, { x: 22, size: 16, dur: 10, delay: 6 },
-  { x: 31, size: 10, dur: 13, delay: 1.5 }, { x: 39, size: 18, dur: 11, delay: 4.5 }, { x: 47, size: 12, dur: 9.5, delay: 7 },
-  { x: 55, size: 14, dur: 12.5, delay: 2 }, { x: 63, size: 22, dur: 10.5, delay: 5 }, { x: 71, size: 10, dur: 14, delay: 0.8 },
-  { x: 79, size: 16, dur: 9, delay: 3.8 }, { x: 87, size: 12, dur: 11.5, delay: 6.5 }, { x: 94, size: 18, dur: 13, delay: 2.6 },
-];
 
 export function ThanksSlide() {
   return (
@@ -311,16 +304,6 @@ export function ThanksSlide() {
       </div>
       <div className="absolute inset-0 bg-gradient-title" />
       <Ambient />
-      <div aria-hidden className="light-sweep" />
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        {sparks.map((s, i) => (
-          <span
-            key={i}
-            className="spark"
-            style={{ left: `${s.x}%`, width: s.size, height: s.size, ["--dur" as string]: `${s.dur}s`, ["--d" as string]: `${s.delay}s` }}
-          />
-        ))}
-      </div>
       <div className="relative z-10 flex h-[996px] w-[1000px] flex-col justify-center pl-[120px]">
         <Kicker tone="dark">Ամփոփում</Kicker>
         <h2 className="anim-flip slide-title-lg mt-8 font-display font-bold text-paper" style={d(200)}>

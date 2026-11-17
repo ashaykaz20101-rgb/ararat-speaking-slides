@@ -371,7 +371,7 @@
   left: 0;
   width: 26%;
   height: 140%;
-  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--paper) 10%, transparent), transparent);
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--sweep, var(--paper)) 12%, transparent), transparent);
   animation: light-sweep 9s ease-in-out infinite;
   animation-delay: 2s;
   opacity: 0;
@@ -385,4 +385,21 @@
   transform-origin: 0 50%;
   animation: line-grow 1200ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
   animation-delay: var(--d, 0ms);
+}
+
+/* Every slide headline gets a glowing accent line that draws in (absolute, so layouts don't shift) */
+.slide-content h2.slide-title, .slide-content h1.slide-title-lg { position: relative; }
+.slide-content h2.slide-title::after, .slide-content h1.slide-title-lg::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -14px;
+  width: 180px;
+  height: 5px;
+  border-radius: 9999px;
+  background-image: var(--gradient-apricot);
+  box-shadow: var(--shadow-glow);
+  transform-origin: 0 50%;
+  animation: line-grow 1100ms cubic-bezier(0.2, 0.85, 0.25, 1) both;
+  animation-delay: calc(var(--d, 0ms) + 600ms);
 }

@@ -110,7 +110,7 @@ function DeckViewer() {
           <span className="h-3 w-3 shrink-0 rotate-45 bg-apricot" />
           <div className="min-w-0">
             <div className="truncate font-display text-base font-bold">Գործազրկությունը և երկրի տնտեսությունը</div>
-            <div className="hidden truncate text-xs text-mist sm:block">Created by JarvislandAI CEO Haykaz Asatryan</div>
+            <div className="hidden truncate text-xs text-mist sm:block">Հետազոտական նախագիծ</div>
           </div>
         </div>
         <div className="flex shrink-0 items-center gap-2">

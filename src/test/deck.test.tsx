@@ -5,9 +5,10 @@ import { RenderSlide } from "@/components/slides/RenderSlide";
 import { unemploymentRates } from "@/slides/stats-data";
 
 describe("presentation deck", () => {
-  it.each(slides.map((s, i) => [s.id, i] as const))("slide %s shows the JarvislandAI credit", (_id, i) => {
+  it.each(slides.map((s, i) => [s.id, i] as const))("slide %s has no author credit", (_id, i) => {
     const { container } = render(<RenderSlide index={i} mode="static" />);
-    expect(container.textContent).toContain("Created by JarvislandAI CEO Haykaz Asatryan");
+    expect(container.textContent).not.toContain("JarvislandAI");
+    expect(container.textContent).not.toContain("Haykaz Asatryan");
   });
 
   it.each(slides.map((s, i) => [s.id, i] as const))("slide %s has an image", (_id, i) => {

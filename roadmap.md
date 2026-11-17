@@ -1,7 +1,7 @@
 # Roadmap
 - [x] Armenian unemployment presentation (web slides + PDF export)
 - [x] Image on every slide, AI presenter on title slide
-- [x] Footer credit on every slide: Created by JarvislandAI CEO Haykaz Asatryan
+- [x] Footer credit removed from every slide (user request)
 - [x] Real Armstat unemployment statistics slide with chart
 - [x] 3D animated transitions and animated (animatic) slide content
 - [x] Final professional polish pass on every slide (spacing, overlaps, image fit)
@@ -16,3 +16,4 @@
 - [ ] Title slide: fully lip-synced ~30 s Armenian speech (part 1 of 3 done: `presenter-lipsync-part1.mp4.asset.json`) — blocked: workspace out of credits for video
 - [x] Title slide: make the speaking button reliably play her voice (user reports she doesn't speak)
 - [x] Thank-you slide: remove the "Ներկայացումը պատրաստել է JarvislandAI · Haykaz Asatryan, CEO" box, add polished professional effects
+- [x] Polished effects on every slide (sparks, light sweep, title accent line, shimmer highlights)

@@ -88,7 +88,7 @@ export function TitleSlide() {
           ՀԵՏԱԶՈՏԱԿԱՆ ՆԱԽԱԳԻԾ
         </div>
         <h1 className="anim-flip slide-title-lg mt-10 font-display font-bold text-paper" style={d(300)}>
-          Ինչպե՞ս է գործազրկությունը ազդում <span className="text-gradient-apricot">երկրի տնտեսության</span> վրա
+          Ինչպե՞ս է գործազրկությունը ազդում <span className="text-shimmer">երկրի տնտեսության</span> վրա
         </h1>
         <p className="anim-rise slide-body-lg mt-10 max-w-[860px] text-mist" style={d(650)}>
           Պատճառներ, տնտեսական հետևանքներ և լուծումներ՝ Հայաստանի օրինակով
