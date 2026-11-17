@@ -12,5 +12,7 @@
 - [x] Title slide presenter speaks ~30 s in Armenian about the topic's meaning, not reading slide text
 - [x] Fix build errors blocking publish
 - [x] Speaking button works on Vercel (video ships inside the app)
-- [ ] Point the vote QR (`PUBLIC_SITE_URL`) at the Vercel address — blocked: need the Vercel link from the user
+- [x] Point the vote QR (`PUBLIC_SITE_URL`) at the Vercel address
 - [ ] Title slide: fully lip-synced ~30 s Armenian speech (part 1 of 3 done: `presenter-lipsync-part1.mp4.asset.json`) — blocked: workspace out of credits for video
+- [x] Title slide: make the speaking button reliably play her voice (user reports she doesn't speak)
+- [x] Thank-you slide: remove the "Ներկայացումը պատրաստել է JarvislandAI · Haykaz Asatryan, CEO" box, add polished professional effects

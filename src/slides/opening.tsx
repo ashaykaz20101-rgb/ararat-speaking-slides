@@ -23,6 +23,7 @@ import { SlideLayout } from "@/components/slides/SlideLayout";
 import { Ambient, IconBadge, ImageFrame, Kicker, d } from "@/components/slides/primitives";
 import { useCountUp, useSlideMode } from "@/components/slides/slide-context";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useHydrated } from "@tanstack/react-router";
 import presenterPoster from "@/assets/presenter-intro-poster.jpg";
 import yerevan from "@/assets/slide-yerevan.jpg";
 import jobseeker from "@/assets/slide-jobseeker.jpg";
@@ -35,6 +36,8 @@ import budget from "@/assets/slide-budget.jpg";
 export function TitleSlide() {
   const rate = useCountUp(12.8, { delay: 1100 });
   const live = useSlideMode() === "live";
+  // Mount the video only in the browser so host-injected attributes can't break hydration.
+  const hydrated = useHydrated();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [speaking, setSpeaking] = useState(false);
 
@@ -49,14 +52,21 @@ export function TitleSlide() {
       return;
     }
     if (v.ended) v.currentTime = 0;
-    v.play().catch(() => setSpeaking(false));
+    v.muted = false;
+    v.volume = 1;
+    if (v.error || v.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) v.load();
+    v.play().catch(() => {
+      // Retry once after a fresh load (slow networks / interrupted preload).
+      v.load();
+      v.play().catch(() => setSpeaking(false));
+    });
   };
   return (
     <SlideLayout tone="dark">
       <div className="absolute inset-0 overflow-hidden">
         <div className="anim-kenburns-slow relative h-full w-full">
           <img src={presenterPoster} alt="AI ներկայացնող" className="h-full w-full object-cover" />
-          {live && (
+          {live && hydrated && (
             <video
               ref={videoRef}
               src="/media/presenter-intro-armenian.mp4"
