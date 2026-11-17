@@ -83,7 +83,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Գործազրկությունը և երկրի տնտեսությունը" },
       { name: "description", content: "Հետազոտական ներկայացում գործազրկության և տնտեսության մասին։" },
-      { name: "author", content: "JarvislandAI — Haykaz Asatryan" },
       { property: "og:title", content: "Գործազրկությունը և երկրի տնտեսությունը" },
       { property: "og:description", content: "Հետազոտական ներկայացում գործազրկության և տնտեսության մասին։" },
       { property: "og:type", content: "website" },

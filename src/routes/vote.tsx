@@ -146,7 +146,7 @@ function VotePage() {
       </main>
 
       <footer className="border-t border-paper/10 px-5 py-4 text-center text-xs text-mist">
-        Created by <strong className="text-paper">JarvislandAI</strong> CEO <strong className="text-paper">Haykaz Asatryan</strong>
+        Գործազրկությունը և երկրի տնտեսությունը
       </footer>
     </div>
   );
