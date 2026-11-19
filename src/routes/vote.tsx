@@ -1,18 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { CheckCircle2, Loader2 } from "lucide-react";
-import {
-  POLL_OPTIONS,
-  POLL_QUESTION,
-  castVote,
-  computePercentages,
-  emptyCounts,
-  fetchPollCounts,
-  totalVotes,
-  votedKey,
-  type PollCounts,
-  type PollOptionKey,
-} from "@/lib/poll";
+import { POLL_OPTIONS, POLL_QUESTION, castVote, votedKey, type PollOptionKey } from "@/lib/poll";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/vote")({
@@ -34,24 +23,11 @@ function VotePage() {
   const [voted, setVoted] = useState<PollOptionKey | null>(null);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
-  const [counts, setCounts] = useState<PollCounts>(emptyCounts);
 
   useEffect(() => {
     const saved = window.localStorage.getItem(votedKey) as PollOptionKey | null;
     if (saved && POLL_OPTIONS.some((o) => o.key === saved)) setVoted(saved);
   }, []);
-
-  useEffect(() => {
-    if (!voted) return;
-    let active = true;
-    const load = () => fetchPollCounts().then((c) => active && setCounts(c)).catch(() => {});
-    load();
-    const t = window.setInterval(load, 4000);
-    return () => {
-      active = false;
-      window.clearInterval(t);
-    };
-  }, [voted]);
 
   const submit = async () => {
     if (!choice) return;
@@ -66,8 +42,6 @@ function VotePage() {
       setSending(false);
     }
   };
-
-  const pct = computePercentages(counts);
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-ink text-paper">
@@ -89,20 +63,7 @@ function VotePage() {
                 <div className="text-sm text-mist">Ձեր ընտրությունը՝ {POLL_OPTIONS.find((o) => o.key === voted)?.label}</div>
               </div>
             </div>
-            <div className="mt-8 text-sm text-mist">Ընթացիկ արդյունքներ · {totalVotes(counts)} ձայն</div>
-            <div className="mt-4 space-y-5">
-              {POLL_OPTIONS.map((o) => (
-                <div key={o.key}>
-                  <div className="flex items-baseline justify-between gap-3 text-sm">
-                    <span>{o.label}</span>
-                    <span className="font-display text-lg font-bold text-apricot">{pct[o.key]}%</span>
-                  </div>
-                  <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-paper/10">
-                    <div className="h-full rounded-full bg-gradient-apricot transition-[width] duration-700" style={{ width: `${pct[o.key]}%` }} />
-                  </div>
-                </div>
-              ))}
-            </div>
+            <p className="mt-6 text-sm text-mist">Արդյունքները կցուցադրվեն ներկայացման ընթացքում՝ էկրանին։</p>
           </div>
         ) : (
           <>

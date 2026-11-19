@@ -17,3 +17,4 @@
 - [x] Title slide: make the speaking button reliably play her voice (user reports she doesn't speak)
 - [x] Thank-you slide: remove the "Ներկայացումը պատրաստել է JarvislandAI · Haykaz Asatryan, CEO" box, add polished professional effects
 - [x] Polished effects on every slide (sparks, light sweep, title accent line, shimmer highlights)
+- [x] Vote page: voters see only a thank-you, no percentages (results only on the presenter slide)
