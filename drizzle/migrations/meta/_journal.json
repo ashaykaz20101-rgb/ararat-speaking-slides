@@ -15,6 +15,20 @@
       "when": 1795428246151,
       "tag": "0001_poll_fifth_option",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795428489648,
+      "tag": "0002_poll_five_questions",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1795428631037,
+      "tag": "0003_poll_votes_insert_all_questions",
+      "breakpoints": true
     }
   ]
 }

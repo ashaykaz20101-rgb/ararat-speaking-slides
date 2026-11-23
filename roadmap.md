@@ -18,4 +18,5 @@
 - [x] Thank-you slide: remove the "Ներկայացումը պատրաստել է JarvislandAI · Haykaz Asatryan, CEO" box, add polished professional effects
 - [x] Polished effects on every slide (sparks, light sweep, title accent line, shimmer highlights)
 - [x] Vote page: voters see only a thank-you, no percentages (results only on the presenter slide)
-- [x] Vote slide: results fill the slide when "Ցույց տալ արդյունքները" is pressed; poll has 5 answers (5th text awaiting user confirmation)
+- [x] Vote slide: results fill the slide when "Ցույց տալ արդյունքները" is pressed
+- [x] Voting has 5 questions (4 answers each); phone answers them one by one, slide has 1–5 question buttons

@@ -4,7 +4,7 @@ import { BarChart3, EyeOff, Smartphone } from "lucide-react";
 import { SlideLayout } from "@/components/slides/SlideLayout";
 import { Ambient, Kicker, d } from "@/components/slides/primitives";
 import { useSlideMode } from "@/components/slides/slide-context";
-import { POLL_OPTIONS, POLL_QUESTION, computePercentages, emptyCounts, fetchPollCounts, totalVotes, VOTE_URL, type PollCounts } from "@/lib/poll";
+import { POLLS, computePercentages, emptyCounts, fetchPollCounts, totalVotes, VOTE_URL, type PollCounts } from "@/lib/poll";
 import { cn } from "@/lib/utils";
 import voteBg from "@/assets/slide-vote.jpg";
 
@@ -12,15 +12,18 @@ import voteBg from "@/assets/slide-vote.jpg";
 export function VoteSlide() {
   const mode = useSlideMode();
   const live = mode === "live";
+  const [q, setQ] = useState(0);
+  const poll = POLLS[q]!;
   const [shown, setShown] = useState(false);
-  const [counts, setCounts] = useState<PollCounts>(emptyCounts);
+  const [counts, setCounts] = useState<PollCounts>(() => emptyCounts(POLLS[0]!));
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
+    setCounts(emptyCounts(poll));
     if (!live || !shown) return;
     let active = true;
     const load = () =>
-      fetchPollCounts()
+      fetchPollCounts(poll)
         .then((c) => active && (setCounts(c), setFailed(false)))
         .catch(() => active && setFailed(true));
     load();
@@ -29,11 +32,16 @@ export function VoteSlide() {
       active = false;
       window.clearInterval(t);
     };
-  }, [live, shown]);
+  }, [live, shown, poll]);
 
-  const pct = computePercentages(counts);
-  const total = totalVotes(counts);
-  const top = Math.max(...POLL_OPTIONS.map((o) => pct[o.key]));
+  const pct = computePercentages(poll, counts);
+  const total = totalVotes(poll, counts);
+  const top = Math.max(...poll.options.map((o) => pct[o.key] ?? 0));
+  const pill = (i: number) =>
+    cn(
+      "slide-body-sm inline-flex h-16 w-16 items-center justify-center rounded-full font-display font-bold transition-all",
+      i === q ? "bg-apricot text-ink-deep elev-glow" : "border border-paper/20 bg-paper/10 text-paper hover:bg-paper/20",
+    );
   const toggleClass = cn(
     "slide-body-sm inline-flex shrink-0 items-center gap-3 rounded-full px-8 py-4 font-semibold transition-transform hover:scale-105",
     shown ? "border border-paper/20 bg-paper/10 text-paper" : "bg-apricot text-ink-deep elev-glow",
@@ -54,9 +62,34 @@ export function VoteSlide() {
       <Ambient grid={false} />
 
       <div className="relative z-10 px-[120px] pt-[84px]">
-        <Kicker tone="dark">Ինտերակտիվ քվեարկություն</Kicker>
-        <h2 className="anim-flip slide-title mt-6 font-display font-bold text-paper" style={d(150)}>
-          {POLL_QUESTION}
+        <div className="flex items-center justify-between gap-8">
+          <Kicker tone="dark">{`Ինտերակտիվ քվեարկություն · Հարց ${q + 1} / ${POLLS.length}`}</Kicker>
+          <div className="anim-rise flex items-center gap-3" style={d(200)}>
+            {POLLS.map((p, i) =>
+              live ? (
+                <button
+                  key={p.id}
+                  type="button"
+                  aria-label={`Հարց ${i + 1}`}
+                  aria-pressed={i === q}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setQ(i);
+                  }}
+                  className={pill(i)}
+                >
+                  {i + 1}
+                </button>
+              ) : (
+                <div key={p.id} className={pill(i)}>
+                  {i + 1}
+                </div>
+              ),
+            )}
+          </div>
+        </div>
+        <h2 key={poll.id} className="anim-flip slide-title mt-4 whitespace-nowrap font-display font-bold text-paper" style={d(150)}>
+          {poll.question}
         </h2>
 
         <div className={cn("mt-10 grid gap-14", shown ? "grid-cols-1" : "grid-cols-[480px_1fr]")}>
@@ -111,11 +144,11 @@ export function VoteSlide() {
             </div>
 
             <div className={cn("flex flex-1 flex-col justify-between", shown ? "mt-8 gap-4" : "mt-8 gap-4")}>
-              {POLL_OPTIONS.map((o, i) => {
-                const value = pct[o.key];
+              {poll.options.map((o, i) => {
+                const value = pct[o.key] ?? 0;
                 const lead = shown && total > 0 && value === top;
                 return (
-                  <div key={o.key} className="anim-rise flex items-center gap-6" style={d((shown ? 150 : 800) + i * 120)}>
+                  <div key={`${poll.id}-${o.key}`} className="anim-rise flex items-center gap-6" style={d((shown ? 150 : 800) + i * 120)}>
                     <span
                       className={cn(
                         "inline-flex shrink-0 items-center justify-center rounded-2xl",
@@ -128,7 +161,7 @@ export function VoteSlide() {
                     <div className="min-w-0 flex-1">
                       <div className="flex items-baseline justify-between gap-6">
                         <span className={cn("text-paper", shown ? "slide-body font-semibold" : "slide-body-sm")}>{o.label}</span>
-                        {shown && <span className="slide-caption shrink-0 text-mist">{counts[o.key]} ձայն</span>}
+                        {shown && <span className="slide-caption shrink-0 text-mist">{counts[o.key] ?? 0} ձայն</span>}
                       </div>
                       <div className={cn("mt-3 overflow-hidden rounded-full bg-paper/10", shown ? "h-5" : "h-3")}>
                         <div
