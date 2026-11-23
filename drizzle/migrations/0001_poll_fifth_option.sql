@@ -1,0 +1,2 @@
+ALTER TABLE public.poll_votes DROP CONSTRAINT poll_votes_option_key_check;
+ALTER TABLE public.poll_votes ADD CONSTRAINT poll_votes_option_key_check CHECK (option_key = ANY (ARRAY['small_business'::text, 'vocational'::text, 'youth'::text, 'industries'::text, 'regions'::text]));

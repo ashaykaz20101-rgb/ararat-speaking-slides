@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, GraduationCap, Sprout, Users, type LucideIcon } from "lucide-react";
+import { BriefcaseBusiness, GraduationCap, MapPin, Sprout, Users, type LucideIcon } from "lucide-react";
 
 export const POLL_ID = "reduce-unemployment";
 
@@ -7,18 +7,19 @@ export const PUBLIC_SITE_URL = "https://presentation-phi-lime.vercel.app";
 export const VOTE_URL = `${PUBLIC_SITE_URL}/vote`;
 export const POLL_QUESTION = "Ի՞նչը կօգնի նվազեցնել գործազրկությունը";
 
-export type PollOptionKey = "small_business" | "vocational" | "youth" | "industries";
+export type PollOptionKey = "small_business" | "vocational" | "youth" | "industries" | "regions";
 
 export const POLL_OPTIONS: { key: PollOptionKey; label: string; icon: LucideIcon }[] = [
   { key: "small_business", label: "Փոքր և միջին բիզնեսի աջակցություն", icon: BriefcaseBusiness },
   { key: "vocational", label: "Մասնագիտական կրթության զարգացում", icon: GraduationCap },
   { key: "youth", label: "Երիտասարդների պրակտիկա և աջակցություն", icon: Users },
   { key: "industries", label: "Գյուղատնտեսության, տուրիզմի և IT-ի զարգացում", icon: Sprout },
+  { key: "regions", label: "Մարզերում նոր աշխատատեղերի ստեղծում", icon: MapPin },
 ];
 
 export type PollCounts = Record<PollOptionKey, number>;
 
-export const emptyCounts = (): PollCounts => ({ small_business: 0, vocational: 0, youth: 0, industries: 0 });
+export const emptyCounts = (): PollCounts => ({ small_business: 0, vocational: 0, youth: 0, industries: 0, regions: 0 });
 
 /** Whole-number percentages that always add up to 100 (largest remainder); all 0 when nobody voted. */
 export function computePercentages(counts: PollCounts): PollCounts {

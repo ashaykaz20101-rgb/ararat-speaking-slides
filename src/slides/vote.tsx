@@ -59,30 +59,39 @@ export function VoteSlide() {
           {POLL_QUESTION}
         </h2>
 
-        <div className="mt-12 grid grid-cols-[480px_1fr] gap-14">
-          <div className="persp">
-            <div className="anim-zoom3d p3d" style={d(400)}>
-              <div className="anim-float3d rounded-[32px] bg-paper p-8 text-ink elev-float">
-                <div className="flex aspect-square w-full items-center justify-center rounded-2xl bg-card">
-                  <QRCodeSVG value={VOTE_URL} size={384} level="M" bgColor="transparent" fgColor="currentColor" className="text-ink-deep" />
+        <div className={cn("mt-10 grid gap-14", shown ? "grid-cols-1" : "grid-cols-[480px_1fr]")}>
+          {!shown && (
+            <div className="persp">
+              <div className="anim-zoom3d p3d" style={d(400)}>
+                <div className="anim-float3d rounded-[32px] bg-paper p-8 text-ink elev-float">
+                  <div className="flex aspect-square w-full items-center justify-center rounded-2xl bg-card">
+                    <QRCodeSVG value={VOTE_URL} size={384} level="M" bgColor="transparent" fgColor="currentColor" className="text-ink-deep" />
+                  </div>
+                  <div className="mt-6 flex items-center gap-4">
+                    <span className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-apricot text-ink-deep">
+                      <Smartphone size={28} />
+                    </span>
+                    <div className="slide-body-sm font-bold">Սկանավորեք և քվեարկեք</div>
+                  </div>
+                  <div className="slide-chrome mt-4 whitespace-nowrap text-center text-ink/60">{VOTE_URL.replace(/^https?:\/\//, "")}</div>
                 </div>
-                <div className="mt-6 flex items-center gap-4">
-                  <span className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-apricot text-ink-deep">
-                    <Smartphone size={28} />
-                  </span>
-                  <div className="slide-body-sm font-bold">Սկանավորեք և քվեարկեք</div>
-                </div>
-                <div className="slide-chrome mt-4 whitespace-nowrap text-center text-ink/60">{VOTE_URL.replace(/^https?:\/\//, "")}</div>
               </div>
             </div>
-          </div>
+          )}
 
-          <div className="anim-swing glass flex flex-col rounded-[32px] p-10" style={d(600)}>
+          <div className={cn("glass flex flex-col rounded-[32px]", shown ? "anim-zoom3d h-[690px] px-14 py-10" : "anim-swing p-10")} style={d(shown ? 0 : 600)}>
             <div className="flex items-center justify-between gap-6">
-              <div>
-                <div className="slide-subtitle font-display font-bold text-paper">Արդյունքներ</div>
-                <div className="slide-caption mt-1 text-mist">
-                  {shown ? `Քվեարկել է ${total} մարդ${failed ? " · կապը վերականգնվում է…" : ""}` : "Արդյունքները թաքցված են"}
+              <div className="flex items-center gap-6">
+                {shown && (
+                  <div className="rounded-2xl bg-paper p-3">
+                    <QRCodeSVG value={VOTE_URL} size={96} level="M" bgColor="transparent" fgColor="currentColor" className="text-ink-deep" />
+                  </div>
+                )}
+                <div>
+                  <div className="slide-subtitle font-display font-bold text-paper">Արդյունքներ</div>
+                  <div className="slide-caption mt-1 text-mist">
+                    {shown ? `Քվեարկել է ${total} մարդ${failed ? " · կապը վերականգնվում է…" : ""}` : "Արդյունքները թաքցված են"}
+                  </div>
                 </div>
               </div>
               {live ? (
@@ -101,27 +110,42 @@ export function VoteSlide() {
               )}
             </div>
 
-            <div className="mt-10 flex flex-1 flex-col justify-between gap-6">
+            <div className={cn("flex flex-1 flex-col justify-between", shown ? "mt-8 gap-4" : "mt-8 gap-4")}>
               {POLL_OPTIONS.map((o, i) => {
                 const value = pct[o.key];
                 const lead = shown && total > 0 && value === top;
                 return (
-                  <div key={o.key} className="anim-rise" style={d(800 + i * 120)}>
-                    <div className="flex items-center gap-5">
-                      <span className={cn("inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl", lead ? "bg-apricot text-ink-deep" : "bg-paper/10 text-apricot")}>
-                        <o.icon size={28} />
-                      </span>
-                      <span className="slide-body-sm flex-1 text-paper">{o.label}</span>
-                      <span className={cn("slide-subtitle w-[150px] text-right font-display font-bold", lead ? "text-apricot" : "text-paper")}>
-                        {shown ? `${value}%` : "?"}
-                      </span>
+                  <div key={o.key} className="anim-rise flex items-center gap-6" style={d((shown ? 150 : 800) + i * 120)}>
+                    <span
+                      className={cn(
+                        "inline-flex shrink-0 items-center justify-center rounded-2xl",
+                        shown ? "h-16 w-16" : "h-14 w-14",
+                        lead ? "bg-apricot text-ink-deep" : "bg-paper/10 text-apricot",
+                      )}
+                    >
+                      <o.icon size={shown ? 32 : 28} />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-baseline justify-between gap-6">
+                        <span className={cn("text-paper", shown ? "slide-body font-semibold" : "slide-body-sm")}>{o.label}</span>
+                        {shown && <span className="slide-caption shrink-0 text-mist">{counts[o.key]} ձայն</span>}
+                      </div>
+                      <div className={cn("mt-3 overflow-hidden rounded-full bg-paper/10", shown ? "h-5" : "h-3")}>
+                        <div
+                          className={cn("h-full rounded-full transition-[width] duration-[1200ms] ease-out", lead ? "bg-gradient-apricot" : "bg-teal")}
+                          style={{ width: shown ? `${value}%` : "0%" }}
+                        />
+                      </div>
                     </div>
-                    <div className="ml-[76px] mt-3 h-4 overflow-hidden rounded-full bg-paper/10">
-                      <div
-                        className={cn("h-full rounded-full transition-[width] duration-[1200ms] ease-out", lead ? "bg-gradient-apricot" : "bg-teal")}
-                        style={{ width: shown ? `${value}%` : "0%" }}
-                      />
-                    </div>
+                    <span
+                      className={cn(
+                        "shrink-0 text-right font-display font-bold",
+                        shown ? "slide-title w-[220px]" : "slide-subtitle w-[120px]",
+                        lead ? "text-apricot" : "text-paper",
+                      )}
+                    >
+                      {shown ? `${value}%` : "?"}
+                    </span>
                   </div>
                 );
               })}
